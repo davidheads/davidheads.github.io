@@ -1,18 +1,33 @@
 table {
-    border-collapse: collapse;
     width: 100%;
-    margin-bottom: 1.5em;
-    background-color: #101A3A; // Fondo más claro que el fondo general
-    color: #FFFFFF; // Texto blanco
-  }
-  
-  th, td {
-    border: 1px solid #7BACFC; // Bordes suaves azulados
-    padding: 0.75em;
-    text-align: left;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    background-color: #101A3A; /* más claro que el fondo base */
+    color: #FFFFFF;
+    font-size: 0.95em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
   }
   
   thead {
-    background-color: #18244A; // Fondo para cabecera
-    font-weight: bold;
+    background-color: #18244A;
   }
+  
+  th, td {
+    padding: 0.75em 1em;
+    text-align: left;
+    border-bottom: 1px solid #7BACFC;
+  }
+  
+  th {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  tbody tr:hover {
+    background-color: #1F2C58;
+    transition: background-color 0.3s ease;
+  }
+  
