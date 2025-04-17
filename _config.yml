@@ -10,7 +10,7 @@ author: David C
 
 navbar-links:
   About Me: "aboutme"
-  Example Page: "example"
+#  Example Page: "example"
 
 ################
 # --- Logo --- #
