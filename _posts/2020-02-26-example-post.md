@@ -23,12 +23,42 @@ Between 4,000 and 70,000 incidents can hit Catalonia’s EMS on any given day, d
 
 ## Cloud architecture at a glance
 
-| Layer               | Huawei Cloud service          | Specs / purpose                                                                                           |
-|---------------------|-------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **Compute**         | Elastic Cloud Server (ECS)    | 8 vCPU, 32 GB RAM, 200 GB SSD + *A30 GPU* for training/inference                                          |
-| **Public access**   | Elastic IP (EIP)              | Dynamic BGP, up to 300 Mb/s to expose APIs & dashboards                                                   |
-| **Durability**      | Cloud Backup & Recovery (CBR) | Point‑in‑time snapshots of data & notebooks                                                               |
-| **Search & viz**    | Cloud Search Service (CSS)    | 3‑node Elasticsearch (4 vCPU, 8 GB RAM each) + Kibana 7.10.2 for interactive dashboards                    |
+<div style="overflow-x: auto; background-color: #101A3A; color: white; padding: 1em; border-radius: 8px; font-size: 0.95em; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+
+<table>
+  <thead style="background-color: #18244A;">
+    <tr>
+      <th>Layer</th>
+      <th>Huawei Cloud service</th>
+      <th>Specs / purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Compute</strong></td>
+      <td>Elastic Cloud Server (ECS)</td>
+      <td>8 vCPU, 32 GB RAM, 200 GB SSD + <em>A30 GPU</em> for training/inference</td>
+    </tr>
+    <tr>
+      <td><strong>Public access</strong></td>
+      <td>Elastic IP (EIP)</td>
+      <td>Dynamic BGP, up to 300 Mb/s to expose APIs & dashboards</td>
+    </tr>
+    <tr>
+      <td><strong>Durability</strong></td>
+      <td>Cloud Backup & Recovery (CBR)</td>
+      <td>Point‑in‑time snapshots of data & notebooks</td>
+    </tr>
+    <tr>
+      <td><strong>Search & viz</strong></td>
+      <td>Cloud Search Service (CSS)</td>
+      <td>3‑node Elasticsearch (4 vCPU, 8 GB RAM each) + Kibana 7.10.2</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
 
 The physical layout keeps **data at rest on the ECS disk, GPU next to CPU, and a private VPC** linking everything; only Kibana’s public URL is exposed for read‑only viewing.
 
@@ -47,11 +77,37 @@ The physical layout keeps **data at rest on the ECS disk, GPU next to CPU, and a
 
 > “Pick the **best model per horizon**, not one model to rule them all.” — PT3 notes
 
-| Horizon        | Leading model | Rationale                                                                                     |
-|---------------|---------------|------------------------------------------------------------------------------------------------|
-| **1 day**     | **LSTM / GRU** | Captures fine‑grained temporal patterns; lowest RMSE at ≤ 24 h                                |
-| **7 days**    | **XGBoost**    | More robust as error grows with horizon; handles exogenous variables well                     |
-| **Seasonal**  | **SARIMA**     | Provides statistical baseline & interpretability for capacity planning                        |
+<div style="overflow-x: auto; background-color: #101A3A; color: white; padding: 1em; border-radius: 8px; font-size: 0.95em; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+
+<table>
+  <thead style="background-color: #18244A;">
+    <tr>
+      <th>Horizon</th>
+      <th>Leading model</th>
+      <th>Rationale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1 day</strong></td>
+      <td><strong>LSTM / GRU</strong></td>
+      <td>Captures fine‑grained temporal patterns; lowest RMSE at ≤ 24 h</td>
+    </tr>
+    <tr>
+      <td><strong>7 days</strong></td>
+      <td><strong>XGBoost</strong></td>
+      <td>More robust as error grows with horizon; handles exogenous variables well</td>
+    </tr>
+    <tr>
+      <td><strong>Seasonal</strong></td>
+      <td><strong>SARIMA</strong></td>
+      <td>Provides statistical baseline & interpretability for capacity planning</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
 
 A standard 70‑15‑15 split (train–val–test) keeps metrics honest before the chosen model is retrained on *all* available data and promoted to production only if it beats the incumbent.
 
