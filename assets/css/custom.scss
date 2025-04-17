@@ -2,14 +2,19 @@ table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 1.5em;
-  }
-  
-  table, th, td {
-    border: 1px solid #ccc;
+    background-color: #101A3A; // Fondo más claro que el fondo general
+    color: #FFFFFF; // Texto blanco
   }
   
   th, td {
+    border: 1px solid #7BACFC; // Bordes suaves azulados
     padding: 0.75em;
     text-align: left;
   }
   
+  thead {
+    background-color: #18244A; // Fondo para cabecera
+    font-weight: bold;
+  }
+  
+  @import "custom";
